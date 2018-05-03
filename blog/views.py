@@ -11,8 +11,7 @@ from django.contrib.auth.decorators import login_required
 
 def contact(request):
     about_me = """
-    I am a young Python enthusiast from Romania, Timisoara, with 2 years of experience
-    in python programming. I am interested in making usefull tools with the help of programming. My next
+    I am a student from Romania, Timisoara. I am interested in making usefull tools with the help of programming. My next
     dream is to build an electric motobike controlled by raspberry pi.
 
     """
