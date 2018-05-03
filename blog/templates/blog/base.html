@@ -1,0 +1,81 @@
+{% load staticfiles %}
+
+<html>
+  <head>
+    <title>CristianGaborBlog</title>
+    <script
+        src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous">
+    </script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    {% block head_extra %} {% endblock head_extra %}
+    <script src="{% static "js/base.js" %}"></script>
+
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav" style="padding-left:350px;">
+          <li class="active"><a href="/">Home</a></li>
+            <li><a href="/archive/">Archive</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+        <form class="navbar-form navbar-left" method="GET" action="">
+          <div class="form-group">
+            <input type="text" class="form-control"  name='q' placeholder="Search for posts" value="{{request.GET.q}}">
+          </div>
+            <button type="submit"  value="search" class="btn btn-warning">Search</button>
+        </form>
+
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+
+      <div class="page-header">
+        {% if user.is_authenticated %}
+        <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+        <a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+        <p style="color: #FFFFFF;
+                  font-family: Verdana, sans-serif;
+                  font-weight: bold;
+                  font-size: 10px;
+                  margin-top:-70px;"
+        class="top-menu">Hello {{ user.username }} <small>(<a href="{% url 'logout' %}">Log out</a>)</small></p>
+        {% else %}
+        <a  style="margin-top:-50px;" href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+        {% endif %}
+        <h1>Cristian Gabor Blog</h1>
+      </div>
+      <div class="row">
+
+        <div class="col-md-8">
+          {% block content %}
+          {% endblock %}
+        </div>
+
+        <div class="col-sm-4">
+
+        </div>
+      </div>
+    </div>
+
+
+
+  </body>
+
+
+  <footer class="container-fluid">
+
+  </footer>
+</html>
